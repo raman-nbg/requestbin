@@ -36,6 +36,21 @@ Now just deploy via git:
 
 It will push to Heroku and give you a URL that your own private RequestBin will be running.
 
+## Deploy your own instance using a pre-built Docker image
+
+### 1. Single RequestBin container with in-memory storage
+
+Note: you will lose request data when the container stops (i.e. stop, restart, crash).
+
+```bash
+docker run --rm -it -p 8000:8000 weshigbee/requestbin
+```
+
+### 2. RequestBin + redis with docker-compose
+
+See https://github.com/g0t4/requestbin/blob/master/docker-compose.prebuilt-weshigbee-requestbin.yml#L1-L14
+
+TODO - setup a runscope/requestbin image
 
 ## Deploy your own instance using Docker
 

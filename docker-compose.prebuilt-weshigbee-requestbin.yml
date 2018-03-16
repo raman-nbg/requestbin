@@ -1,0 +1,14 @@
+version: "2"
+
+services:
+    requestbin:
+        image: weshigbee/requestbin
+        environment:
+            REALM: prod
+            REDIS_URL: "//redis:6379"
+            WEB_CONCURRENCY: 2
+            MAX_REQUESTS: 2000
+        ports:
+            - "8000:8000"
+    redis:
+        image: redis
