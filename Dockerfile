@@ -23,6 +23,7 @@ ADD requestbin  /opt/requestbin/requestbin/
 EXPOSE 8000
 
 WORKDIR /opt/requestbin
-CMD gunicorn -b 0.0.0.0:8000 --worker-class gevent --max-requests 1000 requestbin:app
+ENV MAX_REQUESTS=0 WORKER_CLASS=gevent
+CMD gunicorn -b 0.0.0.0:8000 --worker-class ${WORKER_CLASS} --max-requests ${MAX_REQUESTS} requestbin:app
 
 

@@ -4,6 +4,7 @@ app:
         REALM: prod
         REDIS_URL: "//redis:6379"
         WEB_CONCURRENCY: 2
+        MAX_REQUESTS: 2000
     links:
         - redis
     ports:
