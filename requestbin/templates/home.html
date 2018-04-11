@@ -3,7 +3,10 @@
     <script type="text/javascript">
       function createBin() {
         $.ajax({'url': '/api/v1/bins', 'type': 'POST', 
-          'data': {'private': $('#private').prop("checked")},
+          'data': {
+            'private': $('#private').prop("checked"),
+            'name': $('#bin-name').val(),
+          },
           'success': function(data) {
             window.location.href = "/"+data['name']+"?inspect";
           }
@@ -23,12 +26,19 @@
               <p class="banner-button">
                 <a class="btn btn-success btn-large" onclick="createBin()"><i class="icon-plus-sign"></i> Create a RequestBin</a>
               </p>
+
+              <p class="banner-option">
+                <label title="By default names are generated, optionally specify a bin name">
+                  name <small>(optional)</small> <input id="bin-name" type="text" />
+                </label>
+              </p>
               
               <p class="banner-option">
                 <label class="checkbox" title="Private bins can only be viewed by you using a browser cookie">
                   <input id="private" type="checkbox" /> &nbsp;Private <small>(only viewable from this browser)</small>
                 </label>
               </p>
+              * OR, juse use whatever name you want to create a public bin without explicitly creating the bin: {{base_url}}/whatever?inspect
             </form>
         </div>
     </div>

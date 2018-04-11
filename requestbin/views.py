@@ -28,7 +28,11 @@ def expand_recent_bins():
 
 @app.endpoint('views.home')
 def home():
-    return render_template('home.html', recent=expand_recent_bins())
+    return render_template (
+                'home.html', 
+                recent=expand_recent_bins(),
+                base_url=request.scheme+'://'+request.host
+           )
 
 
 @app.endpoint('views.bin')
@@ -36,7 +40,8 @@ def bin(name):
     try:
         bin = db.lookup_bin(name)
     except KeyError:
-        return "Not found\n", 404
+        # just make the bin if it doesn't exist - in the spirit of mongodb :)
+        bin = db.create_bin(name, private=False)
     if request.query_string == 'inspect':
         if bin.private and session.get(bin.name) != bin.secret_key:
             return "Private bin\n", 403
